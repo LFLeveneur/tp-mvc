@@ -33,4 +33,14 @@ abstract class AbstractController
 
         exit;
     }
+
+    public function redirect(string $url, array $args = [])
+    {
+        $url = "/" . trim($url, "/");
+        foreach ($args as $key => $value) {
+            $url = str_replace("{" . $key . "}", $value, $url);
+        }
+        header("Location: $url");
+        exit;
+    }
 }
